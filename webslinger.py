@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 webdriver = os.path.dirname(os.path.abspath(__file__))
-webdriver = os.path.join(webdriver, 'chromedriver_win32', 'chromedriver.exe')
+webdriver = os.path.join(webdriver, 'chromedriver_linux64', 'chromedriver')
 print(webdriver)
 
 driver = Chrome(webdriver)
