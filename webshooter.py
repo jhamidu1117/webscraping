@@ -6,6 +6,8 @@ import pandas as pd
 
 class WebShooter:
     def __init__(self):
+        self.uname = 'hot_jamil'
+        self.passwd = 'hottest123'
         self.meta_data = pd.DataFrame.empty
         self.url_targets = []
         self.pages = []
@@ -26,9 +28,13 @@ class WebShooter:
             # print('found the URL: ', a['href'])
             self.links.append(a['href'])
 
+    def web_crawl(self, link):
+        pass
+
+
 
 if __name__ == "__main__":
     shooter = WebShooter()
-    shooter.web_scope('https://www.wikipedia.org/')
+    shooter.web_scope('http://127.0.0.1:8000/')
     shooter.web_shoot()
-    print(shooter.pages)
+    print(shooter.links)

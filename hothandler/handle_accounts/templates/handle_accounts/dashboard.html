@@ -1,0 +1,29 @@
+{% extends 'base_generic.html' %}
+
+
+{% block content %}
+<div class="container">
+	<h1 class="text-center logo my-4">
+		<a>add accounts to handle</a>
+	</h1>
+	<div class="row justify-content-center">
+		<div class="col-lg-8 col-md-10 col-sm-12">
+			<div class="card">
+				<div class="card-body">
+					<a class="btn btn-primary  btn-sm btn-block" href="{% url 'dashboard' %}">connect new account</a>
+					<table class="table table-sm">
+						<tr>
+							<th>Platform</th>
+							<th>account name</th>
+							<th>Status</th>
+							<th>Update</th>
+							<th>Remove</th>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
