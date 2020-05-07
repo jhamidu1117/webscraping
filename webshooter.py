@@ -29,6 +29,10 @@ class WebShooter:
             self.links.append(a['href'])
 
     def web_crawl(self, link):
+        """"
+        for link in self.links:
+            if
+        """
         pass
 
 
