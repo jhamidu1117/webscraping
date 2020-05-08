@@ -41,13 +41,20 @@ def true_random16():
     return saltybit
 
 
-def true_iv():
-    iv = os.urandom(16)
+def true_key(phrase):
+    key = hashlib.md5(bytes(phrase, 'utf-8')).digest()
+    key = key[:16]
+    return key
+
+
+def true_iv(phrase):
+    iv = hashlib.md5(bytes(phrase, 'utf-8')).digest()
+    iv = iv[:16]
     return iv
 
 
 def true_fill():
-    hashybit = hashlib.sha512(true_random16()).digest()
+    hashybit = hashlib.sha512(bytes(SECRET_KEY, 'utf-8')).digest()
     return hashybit
 
 
@@ -57,7 +64,6 @@ def true_encrypt(key, iv, data):
     to_encrypt = bytes(data, 'utf-8')
     fill = b'|' + padding[len(to_encrypt) + 1:]
     to_encrypt = to_encrypt + fill
-    print(to_encrypt)
     data_crypt = aes.encrypt(to_encrypt)
     return data_crypt
 
@@ -66,15 +72,15 @@ def true_decrypt(key, iv, data):
     aes = AES.new(key, AES.MODE_CBC, iv, )
     open_secret = aes.decrypt(data)
     open_secret = open_secret.split(b'|')[0]
-    return open_secret
+    return open_secret.decode(encoding='utf-8')
 
 
 if __name__ == '__main__':
     pass_phrase = 'chicken_da_corn'
-    my_key = true_random16()
-    print(b64encode(my_key).decode(encoding='utf-8'))
-    my_iv = true_iv()
-    secret_pass = true_encrypt(key=my_key, iv=my_iv, data=pass_phrase)
-    print(b64encode(secret_pass).decode(encoding='utf-8'))
-    secret_open = true_decrypt(key=my_key, iv=my_iv, data=secret_pass).decode(encoding='utf-8')
+    key_phrase = 'user_name_hash'
+    iv_phrase = 'email_hash'
+    my_true_key = true_key(key_phrase)
+    my_true_iv = true_iv(iv_phrase)
+    secret_pass = true_encrypt(key=my_true_key, iv=my_true_iv, data=pass_phrase)
+    secret_open = true_decrypt(key=my_true_key, iv=my_true_iv, data=secret_pass)
     print(secret_open)
