@@ -24,13 +24,13 @@ def signup(request):
 
 
 @login_required
-def profile(reqest):
-    if reqest.method == 'POST':
-        form = CreateProfileForm(reqest.POST, instance=reqest.user.profile)
+def profile(request):
+    if request.method == 'POST':
+        form = CreateProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():
             prof = form.save()
             return redirect('home')
     else:
-        form = CreateProfileForm(instance=reqest.user.profile)
-    return render(reqest, 'signup.html', {'form': form})
+        form = CreateProfileForm(instance=request.user.profile)
+    return render(request, 'signup.html', {'form': form})
 

@@ -10,16 +10,37 @@
 		<div class="col-lg-8 col-md-10 col-sm-12">
 			<div class="card">
 				<div class="card-body">
-					<a class="btn btn-primary  btn-sm btn-block" href="{% url 'dashboard' %}">connect new account</a>
+					<a class="btn btn-primary  btn-sm btn-block" href="{% url 'add' %}">connect new account</a>
 					<table class="table table-sm">
 						<tr>
 							<th>Platform</th>
-							<th>account name</th>
-							<th>Status</th>
+							<th>edit account name</th>
+							<th>edit account Password</th>
 							<th>Update</th>
 							<th>Remove</th>
 						</tr>
-
+						{% for account in accounts_to_handle %}
+						<tr>
+							<td>
+								{{account.platform_name}}
+							</td>
+							<td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+								<a href="{% url 'sync' account.pk %}">{{account.platform_name}}</a>
+								<small class="text-muted d-block">
+									{{ account.platform_user_name }}
+								</small>
+							</td>
+							<td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+								<a href="{% url 'sync' account.pk %}">{{account.platform_name}}</a>
+								<small class="text-muted d-block">
+									{{ account.platform_user_password }}
+								</small>
+							</td>
+							<td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:1px;">
+								This cell has more content.This cell has more content.This cell has more content.This cell has more content.This cell has more content.This cell has more content.
+							</td>
+						</tr>
+						{% endfor %}
 					</table>
 				</div>
 

@@ -3,7 +3,7 @@ from Crypto.Cipher import AES
 import hashlib
 import random
 import os
-from base64 import b64encode
+from base64 import b64encode, b64decode
 
 
 def true_random16():
@@ -35,11 +35,14 @@ def true_encrypt(key, iv, data):
     fill = b'|' + padding[len(to_encrypt) + 1:]
     to_encrypt = to_encrypt + fill
     data_crypt = aes.encrypt(to_encrypt)
+    data_crypt = b64encode(data_crypt).decode()
     return data_crypt
 
 
 def true_decrypt(key, iv, data):
-    aes = AES.new(key, AES.MODE_CBC, iv, )
+    aes = AES.new(key, AES.MODE_CBC, iv)
+    data = data.encode('ascii')
+    data = b64decode(data)
     open_secret = aes.decrypt(data)
     open_secret = open_secret.split(b'|')[0]
-    return open_secret.decode(encoding='utf-8')
+    return open_secret.decode()
