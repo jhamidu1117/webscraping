@@ -36,7 +36,6 @@ class WebShooter:
         pass
 
 
-
 if __name__ == "__main__":
     shooter = WebShooter()
     shooter.web_scope('http://127.0.0.1:8000/')

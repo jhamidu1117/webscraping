@@ -5,9 +5,26 @@ from handle_accounts.models import Platform
 from handle_accounts.forms import SyncForm
 from handle_accounts import cipher
 from base64 import b64encode
+from django.http import StreamingHttpResponse
 
+import datetime
+import time
 
 # Create your views here.
+
+
+@login_required
+def stream(request):
+    def event_stream():
+        while True:
+            time.sleep(3)
+            yield 'data: The server time is: %s\n\n' % datetime.datetime.now()
+    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+
+
+@login_required
+def events(request):
+    return render(request, 'handle_accounts/serverSideEvents.html')
 
 
 @login_required
