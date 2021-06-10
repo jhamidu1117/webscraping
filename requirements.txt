@@ -3,7 +3,7 @@ beautifulsoup4==4.9.0
 certifi==2020.4.5.1
 chardet==3.0.4
 crypto==1.4.1
-Django==3.0.6
+Django==3.1.12
 django-widget-tweaks==1.4.8
 idna==2.9
 Naked==0.1.31
